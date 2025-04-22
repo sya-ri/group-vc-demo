@@ -16,7 +16,6 @@ export default function CreateRoomPage() {
   const [roomId, setRoomId] = useState("")
   const [isCreating, setIsCreating] = useState(false)
   const [isCreated, setIsCreated] = useState(false)
-  const [enableVideo, setEnableVideo] = useState(true)
   const router = useRouter()
   const { toast } = useToast()
 
@@ -42,7 +41,7 @@ export default function CreateRoomPage() {
   }
 
   const joinRoom = () => {
-    router.push(`/room/${roomId}?video=${enableVideo}`)
+    router.push(`/room/${roomId}`)
   }
 
   return (
@@ -54,21 +53,15 @@ export default function CreateRoomPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           {!isCreated ? (
-            <>
               <div className="space-y-2">
                 <Label htmlFor="room-name">ルーム名（任意）</Label>
                 <Input
-                  id="room-name"
-                  placeholder="ミーティング名を入力"
-                  value={roomName}
-                  onChange={(e) => setRoomName(e.target.value)}
+                    id="room-name"
+                    placeholder="ミーティング名を入力"
+                    value={roomName}
+                    onChange={(e) => setRoomName(e.target.value)}
                 />
               </div>
-              <div className="flex items-center space-x-2">
-                <Switch id="video-mode" checked={enableVideo} onCheckedChange={setEnableVideo} />
-                <Label htmlFor="video-mode">ビデオを有効にする</Label>
-              </div>
-            </>
           ) : (
             <div className="space-y-4">
               <div className="p-4 bg-gray-100 rounded-lg dark:bg-gray-800">
